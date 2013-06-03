@@ -37,6 +37,13 @@
   (map-indexed (fn [x y] [y x]) coll)
   )
 
+(defn ilog [x]
+  ;; log the content of x, returns x
+  (do
+    (logging/info x)
+    x)
+  )
+
 ;; (defn -main [& args]
 ;;   (println (cli-simple args))
 ;;  )
