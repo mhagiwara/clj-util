@@ -68,6 +68,10 @@
   (str-shift-fn
    (fn [c-int] (char-shift c-int (UNICODE_MAP :fullnum) (UNICODE_MAP :halfnum)))))
 
+(def halfnum->fullnum
+  (str-shift-fn
+   (fn [c-int] (char-shift c-int (UNICODE_MAP :halfnum) (UNICODE_MAP :fullnum)))))
+
 (def fullalpha->halfalpha
   (str-shift-fn
    (fn [c-int] (-> c-int (char-shift (UNICODE_MAP :fullalpha_lower) (UNICODE_MAP :halfalpha_lower))
@@ -92,14 +96,13 @@
    (fn [c-int] (if (= c-int (int \ー)) c-int
                    (char-shift c-int (UNICODE_MAP :hiragana) (UNICODE_MAP :katakana))))))
 
-;; (defn -main [& argv]
-;;   (println (map char->ctype "Aaあア漢％＄百"))
-;;   (let [s "Ｃｌｏｊｕｒｅ Programming （クロージャー）１２３456! を楽しもう"]
-;;     (println (fullnum->halfnum s))
-;;     (println (fullalpha->halfalpha s))
-;;     (println (halfalpha->fullalpha s))
-;;     (println (fullalpha-lower s))
-;;     (println (kata->hira s))
-;;     (println (hira->kata s))
-;;     )
-;;  )
+(defn -main [& argv]
+   (println (map char->ctype "Aaあア漢％＄百"))
+   (let [s "Ｃｌｏｊｕｒｅ Programming （クロージャー）１２３456! を楽しもう"]
+     (println (fullnum->halfnum s))
+     (println (halfnum->fullnum s))
+     (println (fullalpha->halfalpha s))
+     (println (halfalpha->fullalpha s))
+     (println (fullalpha-lower s))
+     (println (kata->hira s))
+     (println (hira->kata s))))
